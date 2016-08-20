@@ -29,12 +29,28 @@ public class ServletUtility {
      * Servlet response for server internal error.
      */
     private static final String SERVER_ERROR_MESSAGE = "Error!!!...";
+    /**
+     * Singleton instance.
+     */
+    private static ServletUtility instance;
 
     /**
      * An empty constructor.
      */
     private ServletUtility() {
 
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public static synchronized ServletUtility getInstance() {
+        if (instance == null) {
+            instance = new ServletUtility();
+        }
+
+        return instance;
     }
 
     /**
@@ -45,7 +61,7 @@ public class ServletUtility {
      *
      * @throws IOException if an I/O error occurs.
      */
-    public static void printValidJSONResponse(
+    public void printValidJSONResponse(
             final HttpServletResponse response, final String text)
             throws IOException {
 
@@ -67,7 +83,7 @@ public class ServletUtility {
      *
      * @throws IOException if an I/O error occurs
      */
-    public static void printInvalidRequestResponse(
+    public void printInvalidRequestResponse(
             final HttpServletResponse response) throws IOException {
 
         final PrintWriter out = response.getWriter();
@@ -86,7 +102,7 @@ public class ServletUtility {
      *
      * @throws IOException if an I/O error occurs
      */
-    public static void printServerErrorResponse(
+    public void printServerErrorResponse(
             final HttpServletResponse response) throws IOException {
 
         final PrintWriter out = response.getWriter();

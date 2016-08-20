@@ -51,14 +51,14 @@ public class InsertNewsServlet extends HttpServlet {
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("status", "success");
                 jsonObj.put("newsID", newsID);
-                ServletUtility.printValidJSONResponse(response, jsonObj.toString());
+                ServletUtility.getInstance().printValidJSONResponse(response, jsonObj.toString());
             } catch (SQLException | NamingException ex) {
                 LOGGER.error("problem inserting news item", ex);
                 
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("status", "error");
                 jsonObj.put("errorMessage", "problem inserting news item");
-                ServletUtility.printValidJSONResponse(response, jsonObj.toString());
+                ServletUtility.getInstance().printValidJSONResponse(response, jsonObj.toString());
             }
         }
     }
