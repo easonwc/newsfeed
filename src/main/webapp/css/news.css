@@ -8,3 +8,18 @@ and open the template in the editor.
     Author     : easonwc
 */
 
+mainNewsTable {
+    width: 99%;
+}
+
+itemRow {
+    width: 100%;
+}
+
+itemColDate {
+    width: 10%;
+}
+
+itemColText {
+    width: 89%;
+}
