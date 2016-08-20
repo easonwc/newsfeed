@@ -4,9 +4,17 @@
         <servlet-name>GetAllNewsServlet</servlet-name>
         <servlet-class>com.wceii.newsfeed.servlets.GetAllNewsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertNewsServlet</servlet-name>
+        <servlet-class>com.wceii.newsfeed.servlets.InsertNewsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetAllNewsServlet</servlet-name>
         <url-pattern>/GetAllNewsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertNewsServlet</servlet-name>
+        <url-pattern>/InsertNewsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

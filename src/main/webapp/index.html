@@ -5,6 +5,49 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/news.css">
         <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                populateNews();
+
+                $("#newsSubmit").click(function () {
+                    submitNewNews();
+                });
+
+            });
+
+            function submitNewNews() {
+
+                $.ajax({
+                    type: "POST",
+                    url: "InsertNewsServlet",
+                    async: false,
+                    dataType: "json",
+                    data: {newsDate: "", newsData: $("#newsText").val()}
+                })
+                        .done(function (data) {
+                            if (data.status === "success") {
+                                $("#statusNotification").html(data.newsID);
+
+                                $("#newsText").val("");
+                            } else {
+                                $("#statusNotification").text(data.errorMessage);
+                            }
+                        });
+            }
+
+            function populateNews() {
+                $.ajax({
+                    type: "GET",
+                    url: "GetAllNewsServlet",
+                    async: false,
+                    dataType: "html"
+                })
+                        .done(function (data) {
+                            $("#newsTable").html(data);
+                        });
+            }
+        </script>
     </head>
     <body>
         <div>
@@ -12,7 +55,12 @@
         </table>
         </div>
         <div>
-            
+            <textarea class="largeInput" name="newsText" id="newsText"></textarea>
+            <!-- TODO add date picker -->
+            <button id="newsSubmit" type="button">Add News</button>
+        </div>
+        <div>
+            <p id="statusParagraph"></p>
         </div>
     </body>
 </html>

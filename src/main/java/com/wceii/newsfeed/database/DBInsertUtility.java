@@ -77,10 +77,11 @@ public class DBInsertUtility {
     /**
      * 
      * @param text
+     * @return
      * @throws SQLException
      * @throws NamingException 
      */
-    public void insertNewsItem(final String text) throws SQLException,
+    public String insertNewsItem(final String text) throws SQLException,
             NamingException {
 
         Connection conn = null;
@@ -94,12 +95,15 @@ public class DBInsertUtility {
             statement = conn.prepareStatement(INSERT_NEWS_ITEM);
 
             java.util.Date rightNow = new java.util.Date();
+            final String id = UUID.randomUUID().toString();
             
-            statement.setString(1, UUID.randomUUID().toString());
+            statement.setString(1, id);
             statement.setString(2, text);
             statement.setLong(3, rightNow.getTime());
             
             statement.executeUpdate();
+            
+            return id;
 
         } finally {
             DatabaseUtility.getInstance().closeDatabaseObjects(results,
