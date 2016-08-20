@@ -46,6 +46,7 @@ public class DBInsertUtility {
     /**
      * 
      * @param item
+     * @return
      * @throws SQLException
      * @throws NamingException 
      */
@@ -101,6 +102,44 @@ public class DBInsertUtility {
             statement.setString(1, id);
             statement.setString(2, text);
             statement.setLong(3, rightNow.getTime());
+            
+            statement.executeUpdate();
+            
+            return id;
+
+        } finally {
+            DatabaseUtility.getInstance().closeDatabaseObjects(results,
+                    statement, conn);
+        }
+    }
+    
+    /**
+     * 
+     * @param text
+     * @param date
+     * @return
+     * @throws SQLException
+     * @throws NamingException 
+     */
+    public String insertNewsItem(final String text, final java.util.Date date)
+            throws SQLException,
+            NamingException {
+
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet results = null;
+
+        try {
+
+            conn = DatabaseUtility.getInstance().getDataSource()
+                    .getConnection();
+            statement = conn.prepareStatement(INSERT_NEWS_ITEM);
+
+            final String id = UUID.randomUUID().toString();
+            
+            statement.setString(1, id);
+            statement.setString(2, text);
+            statement.setLong(3, date.getTime());
             
             statement.executeUpdate();
             

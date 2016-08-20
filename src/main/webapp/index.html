@@ -4,7 +4,14 @@
         <title>News Feed</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/news.css">
-        <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+        <script src="js/jquery-3.1.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
         <script type="text/javascript">
             $(document).ready(function () {
 
@@ -18,12 +25,14 @@
 
             function submitNewNews() {
 
+                var currentDate = $("#datepicker").datepicker("getDate");
+
                 $.ajax({
                     type: "POST",
                     url: "InsertNewsServlet",
                     async: false,
                     dataType: "json",
-                    data: {newsDate: "", newsData: $("#newsText").val()}
+                    data: {newsDate: currentDate, newsData: $("#newsText").val()}
                 })
                         .done(function (data) {
                             if (data.status === "success") {
@@ -48,19 +57,19 @@
                             $("#newsTable").html(data);
                         });
             }
-            
+
             setInterval(populateNews, 5000);
         </script>
     </head>
     <body>
         <div>
             <table id="newsTable" class="mainNewsTable">
-        </table>
+            </table>
         </div>
         <hr/>
         <div>
             <textarea class="largeInput" name="newsText" id="newsText"></textarea>
-            <!-- TODO add date picker -->
+            <p>Date: <input type="text" id="datepicker"></p>
             <button id="newsSubmit" type="button">Add News</button>
         </div>
         <div>
