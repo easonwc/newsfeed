@@ -49,7 +49,7 @@ public class DBInsertUtility {
      * @throws SQLException
      * @throws NamingException 
      */
-    public void insertNewsItem(final NewsItem item) throws SQLException,
+    public String insertNewsItem(final NewsItem item) throws SQLException,
             NamingException {
 
         Connection conn = null;
@@ -68,6 +68,7 @@ public class DBInsertUtility {
             
             statement.executeUpdate();
 
+            return item.getNewsID();
         } finally {
             DatabaseUtility.getInstance().closeDatabaseObjects(results,
                     statement, conn);

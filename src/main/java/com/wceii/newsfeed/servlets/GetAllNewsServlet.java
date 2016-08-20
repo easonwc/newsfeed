@@ -59,6 +59,7 @@ public class GetAllNewsServlet extends HttpServlet {
                 LOGGER.info("total number of news items: " + items.size());
                 
                 Collections.sort(items);
+                Collections.reverse(items);
                 
                 for(NewsItem tmpItem : items) {
                     out.println("<tr class=\"itemRow\">");
@@ -75,6 +76,8 @@ public class GetAllNewsServlet extends HttpServlet {
                     
                     out.println("</tr>");
                 }
+            } else {
+                LOGGER.info("total number of news items: 0");
             }
         }
     }

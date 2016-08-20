@@ -48,11 +48,13 @@ public class InsertNewsServlet extends HttpServlet {
         LOGGER.info("insert news servlet parameters (date: " + date 
                 + " - text: " + text + ")");
 
-        if (date != null && !date.isEmpty() && text != null && !text.isEmpty()) {
+        if (text != null && !text.isEmpty()) {
             try {
                 //TODO read date from parameter
                 String newsID = DBInsertUtility.getInstance().insertNewsItem(text);
 
+                LOGGER.info("inserted news item id: " + newsID);
+                
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("status", "success");
                 jsonObj.put("newsID", newsID);
@@ -65,6 +67,8 @@ public class InsertNewsServlet extends HttpServlet {
                 jsonObj.put("errorMessage", "problem inserting news item");
                 ServletUtility.getInstance().printValidJSONResponse(response, jsonObj.toString());
             }
+        } else {
+            LOGGER.warn("invalid or insufficient parameters");
         }
     }
 
