@@ -7,13 +7,13 @@ import java.util.Objects;
  * @author easonwc
  */
 public class NewsItem {
-    
+
     private String newsID;
     private String text;
-    private String publicationDate;
-    
+    private long publicationDate;
+
     public NewsItem() {
-        
+
     }
 
     public String getNewsID() {
@@ -32,12 +32,20 @@ public class NewsItem {
         this.text = newsText;
     }
 
-    public String getPublicationDate() {
+    public long getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(String date) {
+    public void setPublicationDate(long date) {
         this.publicationDate = date;
+    }
+
+    public void setPublicationDate(java.util.Date date) {
+        this.publicationDate = date.getTime();
+    }
+
+    public void setPublicationDate(java.sql.Date date) {
+        this.publicationDate = date.getTime();
     }
 
     @Override
