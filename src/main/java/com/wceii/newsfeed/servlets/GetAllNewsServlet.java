@@ -1,11 +1,20 @@
 package com.wceii.newsfeed.servlets;
 
+import com.wceii.newsfeed.NewsItem;
+import com.wceii.newsfeed.TextFormatter;
+import com.wceii.newsfeed.database.DBSelectUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,6 +26,11 @@ public class GetAllNewsServlet extends HttpServlet {
      * The serial version UID identifier.
      */
     private static final long serialVersionUID = 66490847509238745L;
+    /**
+     *
+     */
+    private static final Logger LOGGER
+            = Logger.getLogger(GetAllNewsServlet.class);
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,18 +43,35 @@ public class GetAllNewsServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetAllNewsServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetAllNewsServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            List<NewsItem> items = new ArrayList<>();
+            try {
+                items.addAll(DBSelectUtility.getInstance().getAllNewsItems());
+            } catch (SQLException | NamingException ex) {
+                LOGGER.error("problem getting news items", ex);
+            }
+            
+            if(!items.isEmpty()) {
+                Collections.sort(items);
+                
+                for(NewsItem tmpItem : items) {
+                    out.println("<tr class=\"itemRow\">");
+                    
+                    out.println("<td class=\"itemColDate\">");
+                    out.println(TextFormatter.getInstance()
+                            .formatLongIntoDateString(tmpItem
+                                    .getPublicationDate()));
+                    out.println("</td>");
+                    
+                    out.println("<td class=\"itemColText\">");
+                    out.println(tmpItem.getText());
+                    out.println("</td>");
+                    
+                    out.println("</tr>");
+                }
+            }
         }
     }
 

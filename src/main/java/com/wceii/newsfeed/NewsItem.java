@@ -6,7 +6,7 @@ import java.util.Objects;
  *
  * @author easonwc
  */
-public class NewsItem {
+public class NewsItem implements Comparable<NewsItem>{
 
     private String newsID;
     private String text;
@@ -71,5 +71,10 @@ public class NewsItem {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int compareTo(NewsItem o) {
+        return Long.compare(this.publicationDate, o.publicationDate);
     }
 }
