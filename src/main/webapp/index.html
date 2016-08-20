@@ -8,8 +8,6 @@
         <script type="text/javascript">
             $(document).ready(function () {
 
-                populateNews();
-
                 $("#newsSubmit").click(function () {
                     submitNewNews();
                 });
@@ -30,6 +28,7 @@
                                 $("#statusNotification").html(data.newsID);
 
                                 $("#newsText").val("");
+                                populateNews();
                             } else {
                                 $("#statusNotification").text(data.errorMessage);
                             }
@@ -47,6 +46,8 @@
                             $("#newsTable").html(data);
                         });
             }
+            
+            setInterval(populateNews(), 5000);
         </script>
     </head>
     <body>

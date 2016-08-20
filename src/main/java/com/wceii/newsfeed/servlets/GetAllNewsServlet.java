@@ -44,6 +44,8 @@ public class GetAllNewsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        LOGGER.info("get all news servlet called");
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             List<NewsItem> items = new ArrayList<>();
@@ -54,6 +56,8 @@ public class GetAllNewsServlet extends HttpServlet {
             }
             
             if(!items.isEmpty()) {
+                LOGGER.info("total number of news items: " + items.size());
+                
                 Collections.sort(items);
                 
                 for(NewsItem tmpItem : items) {

@@ -27,7 +27,7 @@ public class InsertNewsServlet extends HttpServlet {
      */
     private static final Logger LOGGER
             = Logger.getLogger(GetAllNewsServlet.class);
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,22 +39,27 @@ public class InsertNewsServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        LOGGER.info("insert news servlet called");
+
         final String date = request.getParameter("newsDate");
         final String text = request.getParameter("newsData");
-        
-        if(date != null && !date.isEmpty() && text != null && !text.isEmpty()) {
+
+        LOGGER.info("insert news servlet parameters (date: " + date 
+                + " - text: " + text + ")");
+
+        if (date != null && !date.isEmpty() && text != null && !text.isEmpty()) {
             try {
                 //TODO read date from parameter
                 String newsID = DBInsertUtility.getInstance().insertNewsItem(text);
-                
+
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("status", "success");
                 jsonObj.put("newsID", newsID);
                 ServletUtility.getInstance().printValidJSONResponse(response, jsonObj.toString());
             } catch (SQLException | NamingException ex) {
                 LOGGER.error("problem inserting news item", ex);
-                
+
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("status", "error");
                 jsonObj.put("errorMessage", "problem inserting news item");
