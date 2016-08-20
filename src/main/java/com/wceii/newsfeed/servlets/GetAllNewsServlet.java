@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 public class GetAllNewsServlet extends HttpServlet {
 
     /**
+     * The serial version UID identifier.
+     */
+    private static final long serialVersionUID = 66490847509238745L;
+    
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
