@@ -39,3 +39,11 @@ and open the template in the editor.
     text-align: left;
     padding: 2px;
 }
+
+.dynatable-head {
+    
+}
+
+.dynatable-sort-header {
+    color: black;
+}
