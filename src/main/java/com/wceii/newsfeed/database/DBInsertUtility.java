@@ -13,7 +13,7 @@ import javax.naming.NamingException;
  * @author easonwc
  */
 public class DBInsertUtility {
-   
+
     /**
      *
      */
@@ -44,11 +44,11 @@ public class DBInsertUtility {
     }
 
     /**
-     * 
+     *
      * @param item
      * @return
      * @throws SQLException
-     * @throws NamingException 
+     * @throws NamingException
      */
     public String insertNewsItem(final NewsItem item) throws SQLException,
             NamingException {
@@ -66,7 +66,7 @@ public class DBInsertUtility {
             statement.setString(1, item.getNewsID());
             statement.setString(2, item.getText());
             statement.setLong(3, item.getPublicationDate());
-            
+
             statement.executeUpdate();
 
             return item.getNewsID();
@@ -75,13 +75,13 @@ public class DBInsertUtility {
                     statement, conn);
         }
     }
-    
+
     /**
-     * 
+     *
      * @param text
      * @return
      * @throws SQLException
-     * @throws NamingException 
+     * @throws NamingException
      */
     public String insertNewsItem(final String text) throws SQLException,
             NamingException {
@@ -98,13 +98,13 @@ public class DBInsertUtility {
 
             java.util.Date rightNow = new java.util.Date();
             final String id = UUID.randomUUID().toString();
-            
+
             statement.setString(1, id);
             statement.setString(2, text);
             statement.setLong(3, rightNow.getTime());
-            
+
             statement.executeUpdate();
-            
+
             return id;
 
         } finally {
@@ -112,14 +112,14 @@ public class DBInsertUtility {
                     statement, conn);
         }
     }
-    
+
     /**
-     * 
+     *
      * @param text
      * @param date
      * @return
      * @throws SQLException
-     * @throws NamingException 
+     * @throws NamingException
      */
     public String insertNewsItem(final String text, final java.util.Date date)
             throws SQLException,
@@ -136,13 +136,13 @@ public class DBInsertUtility {
             statement = conn.prepareStatement(INSERT_NEWS_ITEM);
 
             final String id = UUID.randomUUID().toString();
-            
+
             statement.setString(1, id);
             statement.setString(2, text);
             statement.setLong(3, date.getTime());
-            
+
             statement.executeUpdate();
-            
+
             return id;
 
         } finally {

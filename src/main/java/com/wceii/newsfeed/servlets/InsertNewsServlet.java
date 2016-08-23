@@ -57,7 +57,7 @@ public class InsertNewsServlet extends HttpServlet {
                 if (dateString != null && !dateString.isEmpty()) {
                     try {
                         int gmtIndex = dateString.indexOf("GMT");
-                        String dateStringCut = dateString.substring(0,gmtIndex);
+                        String dateStringCut = dateString.substring(0, gmtIndex);
                         LOGGER.info("date altered: " + dateStringCut);
                         newsDate = TextFormatter.getInstance()
                                 .formatStringIntoDate(dateStringCut);

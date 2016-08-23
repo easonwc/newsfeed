@@ -46,8 +46,7 @@ public class DBSelectUtility {
 
     /**
      *
-     * @return
-     * @throws SQLException
+     * @return @throws SQLException
      * @throws NamingException
      */
     public Set<NewsItem> getAllNewsItems() throws SQLException,

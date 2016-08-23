@@ -6,7 +6,7 @@ import java.util.Objects;
  *
  * @author easonwc
  */
-public class NewsItem implements Comparable<NewsItem>{
+public class NewsItem implements Comparable<NewsItem> {
 
     private String newsID;
     private String text;
@@ -20,7 +20,7 @@ public class NewsItem implements Comparable<NewsItem>{
         return newsID;
     }
 
-    public void setNewsID(String id) {
+    public void setNewsID(final String id) {
         this.newsID = id;
     }
 
@@ -28,7 +28,7 @@ public class NewsItem implements Comparable<NewsItem>{
         return text;
     }
 
-    public void setText(String newsText) {
+    public void setText(final String newsText) {
         this.text = newsText;
     }
 
@@ -36,15 +36,15 @@ public class NewsItem implements Comparable<NewsItem>{
         return publicationDate;
     }
 
-    public void setPublicationDate(long date) {
+    public void setPublicationDate(final long date) {
         this.publicationDate = date;
     }
 
-    public void setPublicationDate(java.util.Date date) {
+    public void setPublicationDate(final java.util.Date date) {
         this.publicationDate = date.getTime();
     }
 
-    public void setPublicationDate(java.sql.Date date) {
+    public void setPublicationDate(final java.sql.Date date) {
         this.publicationDate = date.getTime();
     }
 
@@ -56,7 +56,7 @@ public class NewsItem implements Comparable<NewsItem>{
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -74,7 +74,7 @@ public class NewsItem implements Comparable<NewsItem>{
     }
 
     @Override
-    public int compareTo(NewsItem o) {
+    public int compareTo(final NewsItem o) {
         return Long.compare(this.publicationDate, o.publicationDate);
     }
 }

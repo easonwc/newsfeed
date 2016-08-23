@@ -40,10 +40,10 @@ public class ServletUtility {
     private ServletUtility() {
 
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public static synchronized ServletUtility getInstance() {
         if (instance == null) {

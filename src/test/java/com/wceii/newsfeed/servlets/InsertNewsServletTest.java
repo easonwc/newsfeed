@@ -18,12 +18,12 @@ import org.springframework.mock.web.MockHttpServletResponse;
  * @author wceii
  */
 public class InsertNewsServletTest {
-    
+
     private static InitialContext context;
-    
+
     public InsertNewsServletTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
         try {
@@ -50,7 +50,7 @@ public class InsertNewsServletTest {
             //ex.printStackTrace();
         }
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
         try {
@@ -59,11 +59,11 @@ public class InsertNewsServletTest {
             //ex.printStackTrace();
         }
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -76,11 +76,11 @@ public class InsertNewsServletTest {
     @Test
     public void testDoPost() throws Exception {
         System.out.println("doPost");
-        
+
         final MockHttpServletRequest request = new MockHttpServletRequest();
         request.addParameter("newsDate", "");
         request.addParameter("newsData", "some great news story");
-        
+
         final MockHttpServletResponse response = new MockHttpServletResponse();
         response.setOutputStreamAccessAllowed(true);
 
@@ -90,11 +90,11 @@ public class InsertNewsServletTest {
         final String contentReceivedFromServlet = response.getContentAsString();
         assertNotNull(contentReceivedFromServlet);
         assertTrue(!contentReceivedFromServlet.isEmpty());
-        
+
         System.out.println(contentReceivedFromServlet);
-        
+
         assertTrue(contentReceivedFromServlet.startsWith("{\"newsID\":"));
         assertTrue(contentReceivedFromServlet.contains("\"status\":\"success\""));
     }
-    
+
 }

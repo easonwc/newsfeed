@@ -69,10 +69,10 @@ public class DatabaseUtility {
             ds = (DataSource) envCtx.lookup(DATASOURCE_CONTEXT);
         }
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public DataSource getDataSource() {
         return ds;

@@ -31,7 +31,7 @@ public class GetAllNewsServlet extends HttpServlet {
      */
     private static final Logger LOGGER
             = Logger.getLogger(GetAllNewsServlet.class);
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,9 +43,9 @@ public class GetAllNewsServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         LOGGER.info("get all news servlet called");
-        
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             List<NewsItem> items = new ArrayList<>();
@@ -54,26 +54,26 @@ public class GetAllNewsServlet extends HttpServlet {
             } catch (SQLException | NamingException ex) {
                 LOGGER.error("problem getting news items", ex);
             }
-            
-            if(!items.isEmpty()) {
+
+            if (!items.isEmpty()) {
                 LOGGER.info("total number of news items: " + items.size());
-                
+
                 Collections.sort(items);
                 Collections.reverse(items);
-                
-                for(NewsItem tmpItem : items) {
+
+                for (NewsItem tmpItem : items) {
                     out.println("<tr class=\"itemRow\">");
-                    
+
                     out.println("<td class=\"itemColDate\">");
                     out.println(TextFormatter.getInstance()
                             .formatLongIntoDateString(tmpItem
                                     .getPublicationDate()));
                     out.println("</td>");
-                    
+
                     out.println("<td class=\"itemColText\">");
                     out.println(tmpItem.getText());
                     out.println("</td>");
-                    
+
                     out.println("</tr>");
                 }
             } else {
