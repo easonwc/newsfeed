@@ -40,10 +40,10 @@ public class InsertNewsServletTest {
             context.createSubcontext("java:comp/env/jdbc");
 
             final MysqlDataSource dataSource = new MysqlDataSource();
-            dataSource.setUser("newsfeeduser");
-            dataSource.setPassword("egdirbaralc345");
-            dataSource.setServerName("localhost");
-            dataSource.setDatabaseName("newsfeed");
+            dataSource.setUser(System.getProperty("sqlUser"));
+            dataSource.setPassword(System.getProperty("sqlPwd"));
+            dataSource.setServerName(System.getProperty("sqlHost"));
+            dataSource.setDatabaseName(System.getProperty("dbName"));
 
             context.bind("java:comp/env/jdbc/NewsFeedDB", dataSource);
         } catch (NamingException ex) {

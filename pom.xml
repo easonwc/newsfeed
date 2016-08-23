@@ -13,6 +13,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <sql.url>jdbc:mysql://127.0.0.1:3306?useSSL=false</sql.url>
+        <sql.host>127.0.0.1</sql.host>
+        <sql.name>newsfeed</sql.name>
         <sql.username>newsfeeduser</sql.username>
         <sql.password>egdirbaralc345</sql.password>
         <java.buid.source>1.8</java.buid.source>
@@ -166,6 +168,24 @@
                 <version>2.19.1</version>
                 <configuration>
                     <argLine>${argLine}</argLine>
+                    <systemProperties>
+                        <property>
+                            <name>sqlUser</name>
+                            <value>${sql.username}</value>
+                        </property>
+                        <property>
+                            <name>sqlPwd</name>
+                            <value>${sql.password}</value>
+                        </property>
+                        <property>
+                            <name>sqlHost</name>
+                            <value>${sql.host}</value>
+                        </property>
+                        <property>
+                            <name>dbName</name>
+                            <value>${sql.name}</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
             </plugin>
             <plugin>
